@@ -1,0 +1,209 @@
+{
+	"coins": 10,
+	"plants": [
+		{
+			"id": 1,
+			"file": "Tree",
+			"fetus": "Плод",
+			"cell": 12,
+			"stage": 1,
+			"points": 6000,
+			"max_points": 6000,
+			"thirst": 4,
+			"bugs": 3,
+			"create": "09.02.2019 7:16:55",
+			"update": "09.02.2019 14:23:17"
+		},
+		{
+			"id": 2,
+			"file": "Tree",
+			"fetus": "Плод",
+			"cell": 14,
+			"stage": 2,
+			"points": 2000,
+			"max_points": 6000,
+			"thirst": 1,
+			"bugs": 2,
+			"create": "25.02.2019 7:16:55",
+			"update": "25.02.2019 14:23:17"
+		}
+	],
+	"cells": [
+		{
+			"id": 1,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 2,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 3,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 4,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 5,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 6,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 7,
+			"is_dug_up": true,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 8,
+			"is_dug_up": true,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 9,
+			"is_dug_up": true,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 10,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 11,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 12,
+			"is_dug_up": true,
+			"plant": 1,
+			"is_fertilized": false
+		},
+		{
+			"id": 13,
+			"is_dug_up": true,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 14,
+			"is_dug_up": true,
+			"plant": 2,
+			"is_fertilized": false
+		},
+		{
+			"id": 15,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 16,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 17,
+			"is_dug_up": true,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 18,
+			"is_dug_up": true,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 19,
+			"is_dug_up": true,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 20,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 21,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 22,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 23,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 24,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		},
+		{
+			"id": 25,
+			"is_dug_up": false,
+			"plant": null,
+			"is_fertilized": false
+		}
+	],
+	"store": [
+	{
+		"name": "Яблоня",
+		"file": "AppleWood",
+		"type": "seed",
+		"fetus": "Яблоко",
+		"max_points": 7200,
+		"price": 5
+	}
+	],
+	"stock": [
+	{
+		"name": "Яблоко",
+		"file": "AppleWood",
+		"count": 3
+	}
+	],
+	"seeds": [
+	{
+		"name": "Дерево",
+		"file": "Tree",
+		"fetus": "Плод",
+		"max_points": 6000,
+		"count": 2
+	}
+	]
+}
