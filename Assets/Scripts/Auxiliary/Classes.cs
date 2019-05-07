@@ -5,12 +5,37 @@ using UnityEngine;
 [System.Serializable]
 public class GardenAR_db
 {
+    public List<PlantType> plants_type;
     public List<Plant> plants;
     public Cell[] cells;
     public List<Store> store;
     public List<Stock> stock;
     public List<Seeds> seeds;
     public int coins;
+    public static GardenAR_db instance;
+
+    public static PlantType GetPlantTypeById (int id)
+    {
+        foreach (PlantType plantType in instance.plants_type)
+            if (plantType.id == id)
+                return plantType;
+        return null;
+    }
+}
+
+
+[System.Serializable]
+public class PlantType
+{
+    public int id;
+    public string file;
+    public string fetus;
+    public int max_points;
+    public string name;
+    public int seed_priсe;
+    public int fetus_price;
+    public int fetus_min;
+    public int fetus_max;
 }
 
 
@@ -18,30 +43,25 @@ public class GardenAR_db
 public class Plant
 {
     public int id;
-    public string file;
+    public int type_id;
     public int cell;
     public int stage;
-    public string fetus;
     public int points;
-    public int max_points;
     public int thirst;
     public int bugs;
     public string create;
     public string update;
 
-
-    public Plant(int id, string file, string fetus, int max_points)
+    public Plant(int id, int type_id)
     {
         this.id = id;
-        this.file = file;
+        this.type_id = type_id;
         this.stage = 1;
         this.points = 0;
-        this.max_points = max_points;
         this.bugs = 0;
         this.thirst = 0;
         this.create = System.DateTime.Now.ToString();
         this.update = System.DateTime.Now.ToString();
-        this.fetus = fetus;
     }
 }
 
@@ -52,30 +72,28 @@ public class Cell
     public bool is_dug_up;
     public int plant;
     public bool is_fertilized;
+    public bool weed;
+    public int grass_stage;
+    public string dug_up_time;
+    public string fertil_time;
 }
 
 [System.Serializable]
 public class Store
 {
-    public string name;
-    public int price;
     public string type;
-    public string file;
-    public string fetus;
-    public int max_points;
+    public int source;
 }
 
 [System.Serializable]
 public class Stock
 {
-    public string name;
+    public int plant_type;
     public int count;
-    public string file;
 
-    public Stock(string name, string file, int count)
+    public Stock(int plant_type, int count)
     {
-        this.name = name;
-        this.file = file;
+        this.plant_type = plant_type;
         this.count = count;
     }
 }
@@ -83,18 +101,12 @@ public class Stock
 [System.Serializable]
 public class Seeds
 {
-    public string name;
-    public string file;
-    public string fetus;
-    public int max_points;
+    public int plant_type;
     public int count;
 
-    public Seeds(string name, string file, string fetus, int max_points)
+    public Seeds(int plant_type)
     {
-        this.name = name;
-        this.file = file;
+        this.plant_type = plant_type;
         this.count = 1;
-        this.fetus = fetus;
-        this.max_points = max_points;
     }
 }

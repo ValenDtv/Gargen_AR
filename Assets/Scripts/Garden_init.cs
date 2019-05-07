@@ -40,7 +40,7 @@ public class Garden_init : MonoBehaviour
             }
             for (int i=0; i < 6; i++)
             {
-                if (plant.points > i*plant.max_points/6)
+                if (plant.points > i*GardenAR_db.GetPlantTypeById(plant.type_id).max_points/6)
                     plant.stage = i+1;
             }
             plant.update = System.DateTime.Now.ToString();

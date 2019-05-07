@@ -6110,7 +6110,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -631.7, y: -302}
+  m_AnchoredPosition: {x: -698, y: -302}
   m_SizeDelta: {x: 1159.6, y: 501.09998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &676922915
@@ -7340,8 +7340,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -0.0000076293945}
-  m_SizeDelta: {x: 0, y: -229.90001}
+  m_AnchoredPosition: {x: 0.000061035156, y: -0.000015258789}
+  m_SizeDelta: {x: 0, y: -4.8999786}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1423552172
 MonoBehaviour:
@@ -7610,7 +7610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fdd33efc588a8a4eabbbd6114e80ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Save: 1
+  Save: 0
   GameObjects:
     Veget: {fileID: 1733623714}
     Grid: {fileID: 110384603}
@@ -7630,6 +7630,7 @@ MonoBehaviour:
     Coins: {fileID: 1693733462}
     Insecticides_button: {fileID: 1804504189}
   gardenAR_db:
+    plants_type: []
     plants: []
     cells: []
     store: []

@@ -62,13 +62,13 @@ public class VegetUnit_script : MonoBehaviour
         bool flag = true;
         Destroy(this.gameObject.transform.Find("tree/Fetus").gameObject);
         foreach (Stock fetus in Collector.gardenAR_db.stock)
-            if (fetus.name == info.fetus)
+            if (fetus.plant_type == info.type_id)
             {
                 fetus.count += 2;
                 flag = false;
             }
         if (flag)
-            Collector.gardenAR_db.stock.Add(new Stock(info.fetus, info.file, 2));
+            Collector.gardenAR_db.stock.Add(new Stock(info.type_id, 2));
         info.stage = 5;
         info.points = 5000;
     }

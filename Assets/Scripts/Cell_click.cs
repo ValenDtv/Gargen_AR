@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Cell_click : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class Cell_click : MonoBehaviour
     void OnMouseDown()
     {
         if (!grid.edit_mode)
+            return;
+        if (EventSystem.current.IsPointerOverGameObject())
             return;
         //this.gameObject.SetActive(false);
         grid.Clear_grid();

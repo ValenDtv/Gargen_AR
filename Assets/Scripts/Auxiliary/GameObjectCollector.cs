@@ -84,5 +84,6 @@ public class GameObjects
             json = Resources.Load<TextAsset>("GardenAR_db").text;
         }
         gardenAR_db = JsonUtility.FromJson<GardenAR_db>(json);
+        GardenAR_db.instance = gardenAR_db;
     }
 }

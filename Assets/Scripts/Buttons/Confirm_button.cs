@@ -12,15 +12,11 @@ public class Confirm_button : MonoBehaviour
 {
     public struct Seed_info
     {
-        public string file;
-        public string fetus;
-        public int max_points;
+        public int plant_type;
 
-        public Seed_info(string file, string fetus, int max_points)
+        public Seed_info(int plant_type)
         {
-            this.file = file;
-            this.fetus = fetus;
-            this.max_points = max_points;
+            this.plant_type = plant_type;
         }
     }
 
@@ -46,7 +42,7 @@ public class Confirm_button : MonoBehaviour
             case "Plant":
                 if (grid.GetComponent<Grid_script>().current.info.plant != 0)
                     break;
-                veget.GetComponent<Veget_script>().New_veget(seed_info.file, seed_info.fetus, seed_info.max_points);
+                veget.GetComponent<Veget_script>().New_veget(seed_info.plant_type);
                 grid.GetComponent<Grid_script>().Clear_grid();
                 grid.GetComponent<Grid_script>().Switch();
                 Mode = "";

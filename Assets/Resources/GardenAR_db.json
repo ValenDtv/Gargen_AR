@@ -1,14 +1,36 @@
 {
 	"coins": 10,
-	"plants": [
+	"plants_type": [
 		{
 			"id": 1,
 			"file": "Tree",
 			"fetus": "Плод",
+			"max_points": 6000,
+			"name": "Дерево",
+			"seed_price": 3,
+			"fetus_price": 1,
+			"fetus_min": 2,
+			"fetus_max": 5
+		},
+		{
+			"id": 2,
+			"file": "AppleWood",
+			"fetus": "Яблоко",
+			"max_points": 7200,
+			"name": "Яблоня",
+			"seed_priсe": 5,
+			"fetus_price": 2,
+			"fetus_min": 4,
+			"fetus_max": 8
+		}
+	],
+	"plants": [
+		{
+			"id": 1,
+			"type_id": 1,
 			"cell": 12,
 			"stage": 1,
 			"points": 6000,
-			"max_points": 6000,
 			"thirst": 4,
 			"bugs": 3,
 			"create": "09.02.2019 7:16:55",
@@ -16,12 +38,10 @@
 		},
 		{
 			"id": 2,
-			"file": "Tree",
-			"fetus": "Плод",
+			"type_id": 1,
 			"cell": 14,
 			"stage": 2,
 			"points": 2000,
-			"max_points": 6000,
 			"thirst": 1,
 			"bugs": 2,
 			"create": "25.02.2019 7:16:55",
@@ -33,176 +53,268 @@
 			"id": 1,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 2,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 3,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 4,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 5,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 6,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 7,
 			"is_dug_up": true,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 8,
 			"is_dug_up": true,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 9,
 			"is_dug_up": true,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 10,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 11,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 12,
 			"is_dug_up": true,
 			"plant": 1,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 13,
 			"is_dug_up": true,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 14,
 			"is_dug_up": true,
 			"plant": 2,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 15,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 16,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 17,
 			"is_dug_up": true,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 18,
 			"is_dug_up": true,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 19,
 			"is_dug_up": true,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 20,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 21,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 22,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 23,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 24,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		},
 		{
 			"id": 25,
 			"is_dug_up": false,
 			"plant": null,
-			"is_fertilized": false
+			"is_fertilized": false,
+			"weed": false,
+			"grass_stage": 0,
+			"dug_up_time": null,
+			"fertil_time": null
 		}
 	],
 	"store": [
 	{
-		"name": "Яблоня",
-		"file": "AppleWood",
 		"type": "seed",
-		"fetus": "Яблоко",
-		"max_points": 7200,
-		"price": 5
+		"source": 2
 	}
 	],
 	"stock": [
 	{
-		"name": "Яблоко",
-		"file": "AppleWood",
+		"plant_type": 2,
 		"count": 3
 	}
 	],
 	"seeds": [
 	{
-		"name": "Дерево",
-		"file": "Tree",
-		"fetus": "Плод",
-		"max_points": 6000,
+		"plant_type": 1,
 		"count": 2
 	}
 	]

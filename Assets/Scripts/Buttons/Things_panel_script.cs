@@ -62,10 +62,12 @@ public class Things_panel_script : MonoBehaviour
         for (int i=0;i<store.Count; i++)
         {
             GameObject product = Instantiate(Resources.Load<GameObject>(@"Product"));
-            string path = @"Pictures/Store/" + store[i].file;
-            product.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>(path);
-            product.transform.GetComponentInChildren<Text>().text = store[i].name + "\n Цена:" + store[i].price.ToString();
             product.transform.SetParent(options.Collector.GetComponent<GameObjectCollector>().GameObjects.Scroll.transform);
+            string path = @"Pictures/Store/" + GardenAR_db.GetPlantTypeById(store[i].source).file;
+            product.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>(path);
+            product.transform.GetComponentInChildren<Text>().text = GardenAR_db.GetPlantTypeById(store[i].source).name + "\n Цена:"
+                + GardenAR_db.GetPlantTypeById(store[i].source).seed_priсe.ToString();
+            product.transform.localScale = new Vector3(1, 1, 1);
             //product.AddComponent<Product_selected>();
             product.GetComponent<Product_selected>().parent = this;
             product.GetComponent<Product_selected>().num = i;
@@ -79,11 +81,13 @@ public class Things_panel_script : MonoBehaviour
         for (int i = 0; i < stock.Count; i++)
         {
             GameObject product = Instantiate(Resources.Load<GameObject>(@"Product"));
-            string path = @"Pictures/Stock/" + stock[i].file;
-            product.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>(path);
-            product.transform.GetComponentInChildren<Text>().text = stock[i].name + "\n Колличество:" + stock[i].count.ToString();
             product.transform.SetParent(options.Collector.GetComponent<GameObjectCollector>().GameObjects.Scroll.transform);
+            string path = @"Pictures/Stock/" + GardenAR_db.GetPlantTypeById(stock[i].plant_type).file;
+            product.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>(path);
+            product.transform.GetComponentInChildren<Text>().text = GardenAR_db.GetPlantTypeById(stock[i].plant_type).fetus
+                + "\n Колличество:" + stock[i].count.ToString();
             //product.AddComponent<Product_selected>();
+            product.transform.localScale = new Vector3(1, 1, 1);
             product.GetComponent<Product_selected>().parent = this;
             product.GetComponent<Product_selected>().num = i;
             Products.Add(product);
@@ -96,11 +100,13 @@ public class Things_panel_script : MonoBehaviour
         for (int i = 0; i < seeds.Count; i++)
         {
             GameObject product = Instantiate(Resources.Load<GameObject>(@"Product"));
-            string path = @"Pictures/Seeds/" + seeds[i].file;
-            product.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>(path);
-            product.transform.GetComponentInChildren<Text>().text = seeds[i].name + "\n Колличество:" + seeds[i].count.ToString();
             product.transform.SetParent(options.Collector.GetComponent<GameObjectCollector>().GameObjects.Scroll.transform);
-           //product.AddComponent<Product_selected>();
+            string path = @"Pictures/Seeds/" + GardenAR_db.GetPlantTypeById(seeds[i].plant_type).file;
+            product.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>(path);
+            product.transform.GetComponentInChildren<Text>().text = GardenAR_db.GetPlantTypeById(seeds[i].plant_type).name + "\n Колличество:"
+                + seeds[i].count.ToString();
+            product.transform.localScale = new Vector3(1, 1, 1);
+            //product.AddComponent<Product_selected>();
             product.GetComponent<Product_selected>().parent = this;
             product.GetComponent<Product_selected>().num = i;
             Products.Add(product);
@@ -167,7 +173,7 @@ public class Things_panel_script : MonoBehaviour
         int num = current ?? -1;
         if (num == -1)
             return;
-        if (store[num].price > GOC.gardenAR_db.coins)
+        if (GardenAR_db.GetPlantTypeById(store[num].source).seed_priсe > GOC.gardenAR_db.coins)
         {
             Products[num].GetComponent<Product_selected>().ResultOfAction(false);
             return;
@@ -178,16 +184,16 @@ public class Things_panel_script : MonoBehaviour
                 Products[num].GetComponent<Product_selected>().ResultOfAction(true);
                 bool flag = false;
                 foreach (Seeds sd in seeds)
-                    if (sd.name == store[num].name)
+                    if (sd.plant_type == store[num].source)
                     {
                         sd.count++;
                         flag = true;
                     }
                 if (!flag)
-                    seeds.Add(new Seeds(store[num].name, store[num].file, store[num].fetus, store[num].max_points));
+                    seeds.Add(new Seeds(store[num].source));
                 break;
         }
-        GOC.gardenAR_db.coins -= store[num].price;
+        GOC.gardenAR_db.coins -= GardenAR_db.GetPlantTypeById(store[num].source).seed_priсe;
         GOC.GameObjects.Coins.GetComponent<Text>().text = GOC.gardenAR_db.coins.ToString();
         saver.Save_DB();
     }
@@ -208,7 +214,8 @@ public class Things_panel_script : MonoBehaviour
         }
         else
         {
-            Products[num].transform.GetComponentInChildren<Text>().text = stock[num].name + "\n Колличество:" + stock[num].count.ToString();
+            Products[num].transform.GetComponentInChildren<Text>().text = GardenAR_db.GetPlantTypeById(stock[num].plant_type).name
+                + "\n Колличество:" + stock[num].count.ToString();
         }
         GOC.GameObjects.Coins.GetComponent<Text>().text = GOC.gardenAR_db.coins.ToString();
         saver.Save_DB();
@@ -222,7 +229,7 @@ public class Things_panel_script : MonoBehaviour
         veget.SetActive(false);
         GOC.GameObjects.Grid.GetComponent<Grid_script>().Switch();
         confirm_button.Mode = "Plant";
-        confirm_button.seed_info = new Confirm_button.Seed_info(seeds[num].file, seeds[num].fetus, seeds[num].max_points);
+        confirm_button.seed_info = new Confirm_button.Seed_info(seeds[num].plant_type);
         confirm_button.gameObject.SetActive(true);
         this.gameObject.SetActive(false);
     }

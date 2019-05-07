@@ -48,7 +48,8 @@ public class Veget_script : MonoBehaviour
 
         for (int i = 0; i < gardenAR_db.plants.Count; i++)
         {
-            string path = gardenAR_db.plants[i].file+@"\"+gardenAR_db.plants[i].file+gardenAR_db.plants[i].stage.ToString();
+            string path = GardenAR_db.GetPlantTypeById(gardenAR_db.plants[i].type_id).file+@"\" + 
+                GardenAR_db.GetPlantTypeById(gardenAR_db.plants[i].type_id).file + gardenAR_db.plants[i].stage.ToString();
             GameObject temp_veg = Instantiate(Resources.Load<GameObject>(@"Models\"+path));
             temp_veg.transform.SetParent(this.gameObject.transform);
             temp_veg.name = i.ToString();
@@ -74,10 +75,10 @@ public class Veget_script : MonoBehaviour
     }
 
     //Функция для добавления расстения
-    public void New_veget(string file, string fetus, int max_points)
+    public void New_veget(int plant_type)
     {
         GameObject new_veg;
-        Plant new_veg_info = new Plant(gardenAR_db.plants.Count + 1, file, fetus, max_points);
+        Plant new_veg_info = new Plant(gardenAR_db.plants.Count + 1, plant_type);
         Grid_script.Game_cell current_cell = grid.current;
         current_cell.info.is_dug_up = true;
         current_cell.info.plant = gardenAR_db.plants.Count + 1;
