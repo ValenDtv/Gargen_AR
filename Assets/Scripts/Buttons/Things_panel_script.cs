@@ -80,6 +80,8 @@ public class Things_panel_script : MonoBehaviour
         Products = new List<GameObject>();
         for (int i = 0; i < stock.Count; i++)
         {
+            if (stock[i].count < 1)
+                continue;
             GameObject product = Instantiate(Resources.Load<GameObject>(@"Product"));
             product.transform.SetParent(options.Collector.GetComponent<GameObjectCollector>().GameObjects.Scroll.transform);
             string path = @"Pictures/Stock/" + GardenAR_db.GetPlantTypeById(stock[i].plant_type).file;
@@ -99,6 +101,8 @@ public class Things_panel_script : MonoBehaviour
         Products = new List<GameObject>();
         for (int i = 0; i < seeds.Count; i++)
         {
+            if (seeds[i].count < 1)
+                continue;
             GameObject product = Instantiate(Resources.Load<GameObject>(@"Product"));
             product.transform.SetParent(options.Collector.GetComponent<GameObjectCollector>().GameObjects.Scroll.transform);
             string path = @"Pictures/Seeds/" + GardenAR_db.GetPlantTypeById(seeds[i].plant_type).file;

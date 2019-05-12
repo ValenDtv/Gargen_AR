@@ -118,8 +118,16 @@ public class VegetUnit_script : MonoBehaviour
                 watering_time += Time.deltaTime;
                 if (watering_time >= 2f)
                 {
-                    info.thirst--;
-                    parent.WaterDropsInit(num);
+                    if (Collector.Online)
+                    {
+                        if (saver.UpdateThirst(info))
+                            parent.WaterDropsInit(num);
+                    }
+                    else
+                    {
+                        info.thirst--;
+                        parent.WaterDropsInit(num);
+                    }
                     watering_time = 0;
                 }
             }

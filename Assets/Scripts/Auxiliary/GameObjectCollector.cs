@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System.Net;
 
 [System.Serializable]
 public class GameObjects
@@ -30,9 +31,19 @@ public class GameObjects
     public class GameObjectCollector : MonoBehaviour
 {
     public bool Save = true;
+    public bool Online = false;
     public GameObjects GameObjects;
     public GardenAR_db gardenAR_db;
     private string path;
+    private int userid = 1;
+    private string url = "http://127.0.0.1:8000/garden/";
+    public int Userid
+    {
+        get
+        {
+            return userid;
+        }
+    }
 
     void Start()
     {
@@ -77,6 +88,16 @@ public class GameObjects
             using (StreamReader sr = new StreamReader(path))
             {
                 json += sr.ReadToEnd();
+            }
+        }
+        else if (Online)
+        {
+            string data = "userid="+userid.ToString();
+            using (var webClient = new WebClient())
+            {
+                // Выполняем запрос по адресу и получаем ответ в виде строки
+                json = webClient.DownloadString(url+"?"+data);
+                Debug.Log(json);
             }
         }
         else

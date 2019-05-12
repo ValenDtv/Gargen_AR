@@ -110,3 +110,19 @@ public class Seeds
         this.count = 1;
     }
 }
+
+
+[System.Serializable]
+public class ThirstUpdate
+{
+    public int userid;
+    public int plantid;
+    public int thirst;
+
+    public ThirstUpdate(int userid, int plantid, int thirst)
+    {
+        this.userid = userid;
+        this.plantid = plantid;
+        this.thirst = thirst;
+    }
+}
