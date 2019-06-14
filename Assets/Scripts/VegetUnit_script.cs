@@ -39,16 +39,6 @@ public class VegetUnit_script : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         Debug.Log("Частицы попали");
-        //if (info.thirst == 0)
-        //    return;
-        //hits++;
-        ////Debug.Log(hits);
-        //if (hits>80)
-        //{
-        //    info.thirst--;
-        //    parent.WaterDropsInit(num);
-        //    hits = 0;
-        //}
         partical_time = 0;
         is_watering = true;
     }
@@ -59,6 +49,22 @@ public class VegetUnit_script : MonoBehaviour
             return;
         if (info.stage != 6)
             return;
+        if (Collector.Online)
+        {
+            dynamic result = saver.Save(new FetusUpdate(Collector.Userid, info.id));
+            if (result != null)
+            {
+                Destroy(this.gameObject.transform.Find("tree/Fetus").gameObject);
+                foreach (Stock fetus in Collector.gardenAR_db.stock)
+                    if (fetus.plant_type == info.type_id)
+                    {
+                        fetus.count = (int)result.fetyscount.Value;
+                    }
+                info.points = (int)result.points.Value;
+                info.stage = (int)result.stage.Value;
+            }
+        }
+        
         bool flag = true;
         Destroy(this.gameObject.transform.Find("tree/Fetus").gameObject);
         foreach (Stock fetus in Collector.gardenAR_db.stock)
@@ -76,7 +82,6 @@ public class VegetUnit_script : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Попал в дерево");
         start_Collision =  Time.time;
         cloud = other;
         insecticides = true;
@@ -95,11 +100,20 @@ public class VegetUnit_script : MonoBehaviour
             info.bugs--;
         if (seconds_passed >= 1f)
         {
-            info.bugs--;
-            parent.BugsInit(num);
+            if (Collector.Online)
+            {
+                int result = saver.Save(new BugsUpdate(Collector.Userid, info.id));
+                if (result != -1)
+                    info.bugs = result;
+                parent.BugsInit(num);
+            }
+            else
+            {
+                info.bugs--;
+                parent.BugsInit(num);
+            }
         }
         insecticides = false;
-        //Debug.Log("Секунд прошло: " + seconds_passed.ToString());
     }
 
 
@@ -120,8 +134,10 @@ public class VegetUnit_script : MonoBehaviour
                 {
                     if (Collector.Online)
                     {
-                        if (saver.UpdateThirst(info))
-                            parent.WaterDropsInit(num);
+                        int result = saver.Save(new ThirstUpdate(Collector.Userid, info.id));
+                        if (result != -1)
+                            info.thirst = result;
+                        parent.WaterDropsInit(num);
                     }
                     else
                     {

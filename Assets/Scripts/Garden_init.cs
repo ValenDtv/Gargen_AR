@@ -18,6 +18,8 @@ public class Garden_init : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (options.Collector.GetComponent<GameObjectCollector>().Online)
+            return;
         gardenAR_db = options.Collector.GetComponent<GameObjectCollector>().gardenAR_db;
         saver = options.Collector.GetComponent<GameObjectCollector>().GameObjects.Saver.GetComponent<Saver_script>();
         foreach (Plant plant in gardenAR_db.plants)

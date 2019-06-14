@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System.Net;
+using UnityEngine.SceneManagement;
+using Newtonsoft.Json.Linq;
 
 [System.Serializable]
 public class GameObjects
@@ -25,6 +27,15 @@ public class GameObjects
     public GameObject Saver;
     public GameObject Coins;
     public GameObject Insecticides_button;
+    public GameObject LoginWindow;
+    public GameObject Login;
+    public GameObject Password;
+    public GameObject ErrorText;
+    public GameObject RegistrationWindow;
+    public GameObject ShovelButton;
+    public GameObject Canvas;
+    public GameObject MenuCanvas;
+    public GameObject RegistrationSuccess;
 }
 
 
@@ -32,11 +43,17 @@ public class GameObjects
 {
     public bool Save = true;
     public bool Online = false;
+    public bool MainScene = true;
     public GameObjects GameObjects;
     public GardenAR_db gardenAR_db;
     private string path;
+    private string token = "";
+    private string tokenpath;
     private int userid = 1;
-    private string url = "http://127.0.0.1:8000/garden/";
+    //private string url = "http://127.0.0.1:8000/garden/";
+    private string url = "http://194.113.104.140:8000/garden/";
+
+
     public int Userid
     {
         get
@@ -44,44 +61,38 @@ public class GameObjects
             return userid;
         }
     }
+    public string Token
+    {
+        get
+        {
+            return token;
+        }
+    }
 
     void Start()
     {
-        //#if UNITY_EDITOR
-        //        path = Application.streamingAssetsPath + @"/GardenAR_db.json";
-        //#endif
-        //#if UNITY_ANDROID
-        //        path = "jar:file://" + Application.dataPath + "!/assets/GardenAR_db.json";
-        //#endif
-        //        Load_DB();
-        path = Application.persistentDataPath + @"/GardenAR_db.json";
-        Load_DB();
-        GameObjects.Coins.GetComponent<Text>().text = gardenAR_db.coins.ToString();
+        if (MainScene)
+        {
+            path = Application.persistentDataPath + @"/GardenAR_db.json";
+            tokenpath = Application.persistentDataPath + @"/token.txt";
+            Load_DB();
+            GameObjects.Coins.GetComponent<Text>().text = gardenAR_db.coins.ToString();
+        }
     }
 
-    private void Update()
+    private bool Authentication(bool result)
     {
-        //gardenAR_db.plants[0].bugs = 4;
-        //GameObjects.Saver.GetComponent<Saver_script>().Save_DB();
+        if (result)
+            return true;
+        else
+        {
+            SceneManager.LoadScene("LoginScene");
+            return false;
+        }
     }
 
     public void Load_DB()
     {
-        //        string json = "";
-        //#if UNITY_EDITOR
-        //        using (StreamReader sr = new StreamReader(path))
-        //        {
-        //            json += sr.ReadToEnd();
-        //        }
-        //        //json = Resources.Load<TextAsset>("GardenAR_db").text;
-        //#endif
-        //#if UNITY_ANDROID
-        //        WWW reader = new WWW(path);
-        //        while (reader.isDone) { };
-        //        json = reader.text;
-        //#endif
-        //        gardenAR_db = JsonUtility.FromJson<GardenAR_db>(json);
-
         string json = "";
         if (File.Exists(path) && Save)
         {
@@ -92,13 +103,27 @@ public class GameObjects
         }
         else if (Online)
         {
-            string data = "userid="+userid.ToString();
+            if (File.Exists(tokenpath))
+            {
+                using (StreamReader sr = new StreamReader(tokenpath))
+                {
+                    token += sr.ReadToEnd();
+                }
+            }
+            else
+            {
+                SceneManager.LoadScene("LoginScene");
+                return;
+            }
+            string data = "userid=" + userid.ToString();
             using (var webClient = new WebClient())
             {
-                // Выполняем запрос по адресу и получаем ответ в виде строки
+                webClient.Headers.Add(HttpRequestHeader.Authorization, token);
                 json = webClient.DownloadString(url+"?"+data);
-                Debug.Log(json);
             }
+            dynamic check = JValue.Parse(json);
+            if (!Authentication(check.authentication.Value))
+                return;
         }
         else
         {

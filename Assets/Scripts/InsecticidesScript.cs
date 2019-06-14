@@ -42,7 +42,6 @@ public class InsecticidesScript : MonoBehaviour
         }
         cloud.transform.Translate(Vector3.forward * 5 * Time.deltaTime);
         time -= Time.deltaTime;
-        //is_active = false;
     }
 
     public void CreateCloud ()

@@ -12,6 +12,7 @@ public class GardenAR_db
     public List<Stock> stock;
     public List<Seeds> seeds;
     public int coins;
+    public bool authentication;
     public static GardenAR_db instance;
 
     public static PlantType GetPlantTypeById (int id)
@@ -117,12 +118,109 @@ public class ThirstUpdate
 {
     public int userid;
     public int plantid;
-    public int thirst;
 
-    public ThirstUpdate(int userid, int plantid, int thirst)
+    public ThirstUpdate(int userid, int plantid)
     {
         this.userid = userid;
         this.plantid = plantid;
-        this.thirst = thirst;
+    }
+}
+
+
+[System.Serializable]
+public class BugsUpdate
+{
+    public int userid;
+    public int plantid;
+
+    public BugsUpdate(int userid, int plantid)
+    {
+        this.userid = userid;
+        this.plantid = plantid;
+    }
+}
+
+
+[System.Serializable]
+public class NewPlantUpdate
+{
+    public int userid;
+    public int type_id;
+    public int cellid;
+
+    public NewPlantUpdate(int userid, int type_id, int cellid)
+    {
+        this.userid = userid;
+        this.type_id = type_id;
+        this.cellid = cellid;
+    }
+}
+
+
+[System.Serializable]
+public class PurchasetUpdate
+{
+    public int userid;
+    public int source;
+
+    public PurchasetUpdate(int userid, int source)
+    {
+        this.userid = userid;
+        this.source = source;
+    }
+}
+
+
+[System.Serializable]
+public class SellUpdate
+{
+    public int userid;
+    public int plant_type;
+
+    public SellUpdate(int userid, int plant_type)
+    {
+        this.userid = userid;
+        this.plant_type = plant_type;
+    }
+}
+
+[System.Serializable]
+public class FetusUpdate
+{
+    public int userid;
+    public int plantid;
+
+    public FetusUpdate(int userid, int plantid)
+    {
+        this.userid = userid;
+        this.plantid = plantid;
+    }
+}
+
+[System.Serializable]
+public class RegistrationData
+{
+    public string login;
+    public string password;
+    public string email;
+
+    public RegistrationData(string login, string password, string email)
+    {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+    }
+}
+
+
+[System.Serializable]
+public class ShovelUpdate
+{
+    public int cellid;
+
+    public ShovelUpdate(int cellid)
+    {
+        this.cellid = cellid;
+        this.cellid = cellid;
     }
 }

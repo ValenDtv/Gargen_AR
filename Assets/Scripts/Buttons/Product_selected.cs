@@ -13,6 +13,7 @@ public class Product_options
 public class Product_selected : MonoBehaviour
 {
     public int num;
+    public int objnum;
     public Things_panel_script parent;
     public Product_options options;
     private GameObject checkMark;

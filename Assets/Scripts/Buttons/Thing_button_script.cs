@@ -29,6 +29,5 @@ public class Thing_button_script : MonoBehaviour
     public void OnMouseDown()
     {
         thingPanel.SetActive(true);
-        //передать скрипту кнопи мод 
     }
 }

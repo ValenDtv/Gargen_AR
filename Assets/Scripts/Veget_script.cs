@@ -27,12 +27,11 @@ public class Veget_script : MonoBehaviour
     }
 
     public Veget_options options;
+    private GameObjectCollector Collector;
     private Grid_script grid;
     private GardenAR_db gardenAR_db;
     private ParticleSystem wateringCan;
     List<Veget_unit> vegets = new List<Veget_unit>();
-    //private List<GameObject> waterDrops;
-    //private List<GameObject> bugs;
     private Things_panel_script thingPanel;
     private Saver_script saver;
 
@@ -40,11 +39,12 @@ public class Veget_script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grid = options.Collector.GetComponent<GameObjectCollector>().GameObjects.Grid.GetComponent<Grid_script>();
-        gardenAR_db = options.Collector.GetComponent<GameObjectCollector>().gardenAR_db;
-        wateringCan = options.Collector.GetComponent<GameObjectCollector>().GameObjects.WateringCan.GetComponent<ParticleSystem>();
-        thingPanel = options.Collector.GetComponent<GameObjectCollector>().GameObjects.Thing_panel.GetComponent<Things_panel_script>();
-        saver = options.Collector.GetComponent<GameObjectCollector>().GameObjects.Saver.GetComponent<Saver_script>();
+        Collector = options.Collector.GetComponent<GameObjectCollector>();
+        grid = Collector.GameObjects.Grid.GetComponent<Grid_script>();
+        gardenAR_db = Collector.gardenAR_db;
+        wateringCan = Collector.GameObjects.WateringCan.GetComponent<ParticleSystem>();
+        thingPanel = Collector.GameObjects.Thing_panel.GetComponent<Things_panel_script>();
+        saver = Collector.GameObjects.Saver.GetComponent<Saver_script>();
 
         for (int i = 0; i < gardenAR_db.plants.Count; i++)
         {
@@ -58,7 +58,6 @@ public class Veget_script : MonoBehaviour
             temp_veg.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             temp_veg.transform.position = grid.game_cells[gardenAR_db.plants[i].cell - 1].plane.transform.position;
             temp_veg.AddComponent<VegetUnit_script>().Collector = options.Collector.GetComponent<GameObjectCollector>();
-            //wateringCan.collision.SetPlane(i+1, temp_veg.transform);
             temp_veg.layer = 9;
             temp_veg.SetActive(true);
             vegets.Add(new Veget_unit(temp_veg, gardenAR_db.plants[i]));
@@ -68,26 +67,19 @@ public class Veget_script : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //Функция для добавления расстения
     public void New_veget(int plant_type)
     {
-        GameObject new_veg;
-        Plant new_veg_info = new Plant(gardenAR_db.plants.Count + 1, plant_type);
         Grid_script.Game_cell current_cell = grid.current;
-        current_cell.info.is_dug_up = true;
-        current_cell.info.plant = gardenAR_db.plants.Count + 1;
-        //this.gameObject.transform.Find("Tree").gameObject.SetActive(true);
-        new_veg =  Instantiate(Resources.Load<GameObject>(@"Models\Tree\Tree1"));
+        Plant new_veg_info = saver.Save(new NewPlantUpdate(Collector.Userid, plant_type, current_cell.info.id));
+        if (new_veg_info == null)
+            return;
+        GameObject new_veg;
+        current_cell.info.plant = new_veg_info.id;
+        //new_veg =  Instantiate(Resources.Load<GameObject>(@"Models\Tree\Tree1"));
+        PlantType veg_type = GardenAR_db.GetPlantTypeById(new_veg_info.type_id);
+        new_veg = Instantiate(Resources.Load<GameObject>(@"Models\" + veg_type.file + @"\" + veg_type.file + @"1"));
         new_veg.name = gardenAR_db.plants.Count.ToString();
         new_veg.transform.SetParent(this.gameObject.transform);
-        //Tree.transform.position = new Vector3(0, 0, 0);
-        //Tree.transform.localEulerAngles.Set(0, 0, 0);
         new_veg.transform.localEulerAngles = new Vector3(0, 0, 0);
         new_veg.transform.localPosition = new Vector3(0, 0, 0);
         new_veg.transform.position = current_cell.plane.transform.position;
@@ -98,22 +90,21 @@ public class Veget_script : MonoBehaviour
         new_veg.SetActive(true);
         vegets.Add(new Veget_unit(new_veg, new_veg_info));
         gardenAR_db.plants.Add(new_veg_info);
-        //Уменьшаем число доступных для посадки семян
         int num = thingPanel.current ?? -1;
-        gardenAR_db.seeds[num].count--;
-        if (gardenAR_db.seeds[num].count < 1)
+        if (num != -1)
         {
-            gardenAR_db.seeds.Remove(gardenAR_db.seeds[num]);
-            //Destroy(Products[num]);
-            thingPanel.current = null;
+            int seednum = thingPanel.Products[num].GetComponent<Product_selected>().objnum;
+            gardenAR_db.seeds[seednum].count--;
+            if (gardenAR_db.seeds[seednum].count < 1)
+            {
+                thingPanel.current = null;
+            }
         }
-        //wateringCan.collision.SetPlane(vegets.Count, new_veg.transform);
         saver.Save_DB();
     }
 
     public void WaterDropsInit(int num)
     {
-        //waterDrops = new List<GameObject>();
         if (vegets[num].waterDrops != null)
             GameObject.Destroy(vegets[num].waterDrops);
 
@@ -136,13 +127,11 @@ public class Veget_script : MonoBehaviour
             sprite.GetComponent<CameraFacingBillboard>().m_Camera = options.Collector.GetComponent<GameObjectCollector>()
                 .GameObjects.AR_camera.GetComponent<Camera>();
             sprite.SetActive(true);
-            //waterDrops.Add(sprite);
         }
     }
 
     public void BugsInit(int num)
     {
-        //bugs = new List<GameObject>();
         if (vegets[num].bugs != null)
             Destroy(vegets[num].bugs);
 
@@ -165,7 +154,6 @@ public class Veget_script : MonoBehaviour
             sprite.GetComponent<CameraFacingBillboard>().m_Camera = options.Collector.GetComponent<GameObjectCollector>()
                 .GameObjects.AR_camera.GetComponent<Camera>();
             sprite.SetActive(true);
-            //bugs.Add(sprite);
         }
     }
 }

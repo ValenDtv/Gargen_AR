@@ -4,10 +4,10 @@
 		{
 			"id": 1,
 			"file": "Tree",
-			"fetus": "Плод",
+			"fetus": "Лимон",
 			"max_points": 6000,
-			"name": "Дерево",
-			"seed_price": 3,
+			"name": "Лимон",
+			"seed_priсe": 3,
 			"fetus_price": 1,
 			"fetus_min": 2,
 			"fetus_max": 5
@@ -304,6 +304,10 @@
 	{
 		"type": "seed",
 		"source": 2
+	},
+	{
+		"type": "seed",
+		"source": 1
 	}
 	],
 	"stock": [

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4d1c28ff643762441aa9aad019309a8c
+guid: b0d7781bb9921d548b8a03f6f386a3af
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,78 +8,47 @@ ModelImporter:
     100004: leaves
     100006: //RootNode
     100008: tree
-    100010: Camera.001
-    100012: Fetus
-    100014: Lamp.001
+    100010: Fetus
+    100012: Lemon
     400000: Camera
     400002: Lamp
     400004: leaves
     400006: //RootNode
     400008: tree
-    400010: Camera.001
-    400012: Fetus
-    400014: Lamp.001
+    400010: Fetus
+    400012: Lemon
     2000000: Camera
-    2000002: Camera.001
     2100000: trunk
     2100002: leaf
-    2100004: blinn1SG.001
-    2100006: blinn1SG.002
-    2100008: blinn1SG.003
-    2100010: blinn1SG.004
-    2100012: blinn1SG.005
+    2100004: blinn1SG
+    2100006: blinn1SG.009
+    2100008: blinn1SG.001
+    2100010: blinn1SG.002
+    2100012: blinn1SG.003
+    2100014: blinn1SG.004
+    2100016: blinn1SG.005
+    2100018: blinn1SG.006
+    2100020: blinn1SG.007
+    2100022: blinn1SG.008
     2300000: leaves
     2300002: tree
     2300004: Fetus
+    2300006: Lemon
     3300000: leaves
     3300002: tree
     3300004: Fetus
+    3300006: Lemon
     4300000: tree
     4300002: leaves
-    4300004: Fetus
+    4300004: Lemon
+    4300006: Fetus
     10800000: Lamp
-    10800002: Lamp.001
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blinn1SG.001
-    second: {fileID: 2100000, guid: c271ee9a12493a144b6cf10249f7f347, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blinn1SG.002
-    second: {fileID: 2100000, guid: 2c98b24d0eb8d4c45b73bd127dff63f1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blinn1SG.003
-    second: {fileID: 2100000, guid: f84e787d7efc8df4e8a79919f88f782f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blinn1SG.004
-    second: {fileID: 2100000, guid: 1221c8831e4aab94582a73d15d951d37, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blinn1SG.005
-    second: {fileID: 2100000, guid: 5c9b7562e333f994199826b35a090e1f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: leaf
-    second: {fileID: 2100000, guid: 52981ec062236fd448038e54f55b1c99, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: trunk
-    second: {fileID: 2100000, guid: 4b971a5924577a44f9118e4beb96c664, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
-    materialName: 2
-    materialSearch: 0
-    materialLocation: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

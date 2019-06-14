@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Confirm_button_options
@@ -20,23 +21,30 @@ public class Confirm_button : MonoBehaviour
         }
     }
 
+    GameObjectCollector Collector;
     public string Mode = "";
     public Confirm_button_options options;
     private GameObject grid;
     private GameObject veget;
-
+    private GameObject shovel_button;
     public Seed_info seed_info;
+    private Saver_script saver;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        grid = options.Collector.GetComponent<GameObjectCollector>().GameObjects.Grid;
-        veget = options.Collector.GetComponent<GameObjectCollector>().GameObjects.Veget;
+        Collector = options.Collector.GetComponent<GameObjectCollector>();
+        saver = Collector.GameObjects.Saver.GetComponent<Saver_script>();
+        grid = Collector.GameObjects.Grid;
+        veget = Collector.GameObjects.Veget;
+        shovel_button = Collector.GameObjects.ShovelButton;
     }
 
     public void OnMouseDown()
     {
+        if (grid.GetComponent<Grid_script>().current == null)
+            return;
         switch(Mode)
         {
             case "Plant":
@@ -44,13 +52,25 @@ public class Confirm_button : MonoBehaviour
                     break;
                 veget.GetComponent<Veget_script>().New_veget(seed_info.plant_type);
                 grid.GetComponent<Grid_script>().Clear_grid();
-                grid.GetComponent<Grid_script>().Switch();
+                grid.GetComponent<Grid_script>().Switch("Plant");
                 Mode = "";
                 veget.SetActive(true);
                 this.gameObject.SetActive(false);
                 break;
             case "Bed":
-                //Вызов функции вскопки грядки
+                if (grid.GetComponent<Grid_script>().current.info.is_dug_up)
+                    break;
+                if (Collector.Online)
+                    if (saver.Save(new ShovelUpdate(grid.GetComponent<Grid_script>().current.info.id)))
+                        grid.GetComponent<Grid_script>().current.info.is_dug_up = true;
+                    else
+                    grid.GetComponent<Grid_script>().current.info.is_dug_up = true;
+                grid.GetComponent<Grid_script>().Clear_grid();
+                grid.GetComponent<Grid_script>().Switch("Bed");
+                Mode = "";
+                veget.SetActive(true);
+                shovel_button.GetComponentInParent<Image>().color = new Color(1f, 1f, 1f);
+                this.gameObject.SetActive(false);
                 break;
         }
     }
